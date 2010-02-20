@@ -2,7 +2,7 @@
 <html>
 
 <head>
-<title>vdab</title>
+<title>testsuite</title>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 
 <script type="text/javascript" src="../javascript/matrix.js"></script>
@@ -10,23 +10,11 @@
 <script type="text/javascript" src="../javascript/sylvester.js"></script>
 <script type="text/javascript" src="../javascript/glUtils.js"></script>
 
-<script>
-if (MJS_FLOAT_ARRAY_TYPE == Array) {
-    function randMatrix() {
-	return [Math.random()*1000, Math.random()*1000, Math.random()*1000, Math.random()*1000,
-		Math.random()*1000, Math.random()*1000, Math.random()*1000, Math.random()*1000,
-		Math.random()*1000, Math.random()*1000, Math.random()*1000, Math.random()*1000,
-		Math.random()*1000, Math.random()*1000, Math.random()*1000, Math.random()*1000];
-    }
-} else {
-    function randMatrix() {
-	return new MJS_FLOAT_ARRAY_TYPE([Math.random()*1000, Math.random()*1000, Math.random()*1000, Math.random()*1000,
-					 Math.random()*1000, Math.random()*1000, Math.random()*1000, Math.random()*1000,
-					 Math.random()*1000, Math.random()*1000, Math.random()*1000, Math.random()*1000,
-					 Math.random()*1000, Math.random()*1000, Math.random()*1000, Math.random()*1000]);
-    }
-}
+<script type="text/javascript" src="../javascript/testEWGL.js"></script>
+<script type="text/javascript" src="../javascript/testmjs.js"></script>
+<script type="text/javascript" src="../javascript/testsylvester.js"></script>
 
+<script>
 
 function go() {
 	var t0,t1,
@@ -34,419 +22,75 @@ function go() {
 		m2,
 		m3,
 		tmp;
-	const COUNT = 300000;
+	const COUNT = 200000;
 	
-	m1 = m4x4.I().rand();
-	m2 = m4x4.I().rand();
-	m3 = m4x4.I().rand();
-	t0 = Date.now();
-	for (var i = 0; i < COUNT; ++i) {
-		m1.x(m2);
-	 
-		tmp = m3;
-		m3 = m2;
-		m2 = m1;
-		m1 = tmp;
-    }
-	t1 = Date.now();
-	document.getElementById('log').innerHTML += "multiply: " + (t1-t0) + "ms<br>";
+	document.getElementById('log').innerHTML += "multiply: " + TestEWGL.multiply(COUNT) + "ms<br>";
 	
-	m1 = randMatrix();
-	m2 = randMatrix();
-	m3 = randMatrix();
-	t0 = Date.now();
-	for (var i = 0; i < COUNT; ++i) {
-		M4x4.mul(m1, m2, m3);
-	 
-		tmp = m3;
-		m3 = m2;
-		m2 = m1;
-		m1 = tmp;
-    }
-	t1 = Date.now();
-	document.getElementById('log').innerHTML += "mjs multiply: " + (t1-t0) + "ms<br>";
+	document.getElementById('log').innerHTML += "mjs multiply: " + Testmjs.multiply(COUNT) + "ms<br>";
 	
-	m1 = randMatrix();
-	m2 = randMatrix();
-	m3 = randMatrix();
-	t0 = Date.now();
-	for (var i = 0; i < COUNT; ++i) {
-		M4x4.mul1(m1, m2, m3);
-	 
-		tmp = m3;
-		m3 = m2;
-		m2 = m1;
-		m1 = tmp;
-    }
-	t1 = Date.now();
-	document.getElementById('log').innerHTML += "mjs1 multiply: " + (t1-t0) + "ms<br>";
+	document.getElementById('log').innerHTML += "mjs1 multiply: " + Testmjs.multiply1(COUNT) + "ms<br>";
 	
-	m1 = Matrix.Random(4,4);
-	m2 = Matrix.Random(4,4);
-	m3 = Matrix.Random(4,4);
-	t0 = Date.now();
-	for (var i = 0; i < COUNT; ++i) {
-		m1.x(m2);
-	 
-		tmp = m3;
-		m3 = m2;
-		m2 = m1;
-		m1 = tmp;
-    }
-	t1 = Date.now();
-	document.getElementById('log').innerHTML += "sylvester multiply: " + (t1-t0) + "ms<br>";
+	document.getElementById('log').innerHTML += "sylvester multiply: " + Testsylvester.multiply(COUNT) + "ms<br>";
 	
 	document.getElementById('log').innerHTML += "=============================================================== <br>";
 
-	m1 = m4x4.I().rand();
-	m2 = m4x4.I().rand();
-	m3 = m4x4.I().rand();
-	t0 = Date.now();
-    for (var i = 0; i < COUNT; ++i) {
-		m1.inverse();
-	 
-		tmp = m3;
-		m3 = m2;
-		m2 = m1;
-		m1 = tmp;
-    }
-    t1 = Date.now();
-	document.getElementById('log').innerHTML += "inverse: " + (t1-t0) + "ms<br>";
+	document.getElementById('log').innerHTML += "inverse: " + TestEWGL.inverse(COUNT) + "ms<br>";
 	
-	m1 = randMatrix();
-	m2 = randMatrix();
-	m3 = randMatrix();
-	t0 = Date.now();
-	for (var i = 0; i < COUNT; ++i) {
-		M4x4.inverseOrthonormal(m1,m2);
-	 
-		tmp = m3;
-		m3 = m2;
-		m2 = m1;
-		m1 = tmp;
-    }
-	t1 = Date.now();
-	document.getElementById('log').innerHTML += "mjs inverse: " + (t1-t0) + "ms<br>";
+	document.getElementById('log').innerHTML += "mjs inverse: " + Testmjs.inverse(COUNT) + "ms<br>";
 	
-	m1 = Matrix.Random(4,4);
-	m2 = Matrix.Random(4,4);
-	m3 = Matrix.Random(4,4);
-	t0 = Date.now();
-	for (var i = 0; i < COUNT; ++i) {
-		m1.inv();
-	 
-		tmp = m3;
-		m3 = m2;
-		m2 = m1;
-		m1 = tmp;
-    }
-	t1 = Date.now();
-	document.getElementById('log').innerHTML += "sylvester inverse: " + (t1-t0) + "ms<br>";
+	document.getElementById('log').innerHTML += "sylvester inverse: " + Testsylvester.inverse(COUNT) + "ms<br>";
 	
 	document.getElementById('log').innerHTML += "=============================================================== <br>";
 	
-	m1 = m4x4.I().rand();
-	m2 = m4x4.I().rand();
-	m3 = m4x4.I().rand();
-	t0 = Date.now();
-    for (var i = 0; i < COUNT; ++i) {
-		m2 = m1.dup();
-	 
-		tmp = m3;
-		m3 = m2;
-		m2 = m1;
-		m1 = tmp;
-    }
-    t1 = Date.now();
-	document.getElementById('log').innerHTML += "dup: " + (t1-t0) + "ms<br>";
+	document.getElementById('log').innerHTML += "dup: " + TestEWGL.duplicate(COUNT) + "ms<br>";
 	
-	m1 = randMatrix();
-	m2 = randMatrix();
-	m3 = randMatrix();
-	t0 = Date.now();
-	for (var i = 0; i < COUNT; ++i) {
-		M4x4.clone(m1,m2);
-
-		tmp = m3;
-		m3 = m2;
-		m2 = m1;
-		m1 = tmp;
-    }
-	t1 = Date.now();
-	document.getElementById('log').innerHTML += "mjs clone: " + (t1-t0) + "ms<br>";
+	document.getElementById('log').innerHTML += "mjs clone: " + Testmjs.duplicate(COUNT) + "ms<br>";
 	
-	m1 = Matrix.Random(4,4);
-	m2 = Matrix.Random(4,4);
-	m3 = Matrix.Random(4,4);
-	t0 = Date.now();
-	for (var i = 0; i < COUNT; ++i) {
-		m2 = m1.dup();
-	 
-		tmp = m3;
-		m3 = m2;
-		m2 = m1;
-		m1 = tmp;
-    }
-	t1 = Date.now();
-	document.getElementById('log').innerHTML += "sylvester clone: " + (t1-t0) + "ms<br>";
+	document.getElementById('log').innerHTML += "sylvester clone: " + Testsylvester.duplicate(COUNT) + "ms<br>";
 	
 	document.getElementById('log').innerHTML += "=============================================================== <br>";
 	
-	m1 = m4x4.I().rand();
-	m2 = m4x4.I().rand();
-	m3 = m4x4.I().rand();
-	t0 = Date.now();
-    for (var i = 0; i < COUNT; ++i) {
-		m1.transpose();
-	 
-		tmp = m3;
-		m3 = m2;
-		m2 = m1;
-		m1 = tmp;
-    }
-    t1 = Date.now();
-	document.getElementById('log').innerHTML += "transpose: " + (t1-t0) + "ms<br>";
+	document.getElementById('log').innerHTML += "transpose: " + TestEWGL.transpose(COUNT) + "ms<br>";
 	
-	m1 = randMatrix();
-	m2 = randMatrix();
-	m3 = randMatrix();
-	t0 = Date.now();
-	for (var i = 0; i < COUNT; ++i) {
-	    M4x4.transpose(m1,m1);
-		
-		tmp = m3;
-		m3 = m2;
-		m2 = m1;
-		m1 = tmp;
-    }
-	t1 = Date.now();
-	document.getElementById('log').innerHTML += "mjs transpose: " + (t1-t0) + "ms<br>";
+	document.getElementById('log').innerHTML += "mjs transpose: " + Testmjs.transpose(COUNT) + "ms<br>";
 	
-	m1 = Matrix.Random(4,4);
-	m2 = Matrix.Random(4,4);
-	m3 = Matrix.Random(4,4);
-	t0 = Date.now();
-	for (var i = 0; i < COUNT; ++i) {
-		m1.transpose();
-	 
-		tmp = m3;
-		m3 = m2;
-		m2 = m1;
-		m1 = tmp;
-    }
-	t1 = Date.now();
-	document.getElementById('log').innerHTML += "sylvester transpose: " + (t1-t0) + "ms<br>";
+	document.getElementById('log').innerHTML += "sylvester transpose: " + Testsylvester.transpose(COUNT) + "ms<br>";
 	
 	document.getElementById('log').innerHTML += "=============================================================== <br>";
 	
-	m1 = m4x4.I().rand();
-	m2 = m1.dup();
-	m3 = m1.dup();
-	t0 = Date.now();
-    for (var i = 0; i < COUNT; ++i) {
-		m1.eql(m2);
-	 
-		tmp = m3;
-		m3 = m2;
-		m2 = m1;
-		m1 = tmp;
-    }
-    t1 = Date.now();
-	document.getElementById('log').innerHTML += "eql always true: " + (t1-t0) + "ms<br>";
+	document.getElementById('log').innerHTML += "eql always true: " + TestEWGL.equal(COUNT) + "ms<br>";
 	
-	m1 = Matrix.Random(4,4);
-	m2 = m1.dup();
-	m3 = m1.dup();
-	t0 = Date.now();
-	for (var i = 0; i < COUNT; ++i) {
-		m1.eql(m2);
-	 
-		tmp = m3;
-		m3 = m2;
-		m2 = m1;
-		m1 = tmp;
-    }
-	t1 = Date.now();
-	document.getElementById('log').innerHTML += "sylvester eql always true: " + (t1-t0) + "ms<br>";
+	document.getElementById('log').innerHTML += "sylvester eql always true: " + Testsylvester.equal(COUNT) + "ms<br>";
 	
 	document.getElementById('log').innerHTML += "=============================================================== <br>";
 	
-	m1 = m4x4.I().rand();
-	m2 = m4x4.I().rand();
-	m3 = m4x4.I().rand();
-	t0 = Date.now();
-    for (var i = 0; i < COUNT; ++i) {
-		m1.determinant();
-	 
-		tmp = m3;
-		m3 = m2;
-		m2 = m1;
-		m1 = tmp;
-    }
-    t1 = Date.now();
-	document.getElementById('log').innerHTML += "determinant: " + (t1-t0) + "ms<br>";
+	document.getElementById('log').innerHTML += "determinant: " + TestEWGL.determinant(COUNT) + "ms<br>";
 	
-	m1 = Matrix.Random(4,4);
-	m2 = Matrix.Random(4,4);
-	m3 = Matrix.Random(4,4);
-	t0 = Date.now();
-	for (var i = 0; i < COUNT; ++i) {
-		m1.det();
-	 
-		tmp = m3;
-		m3 = m2;
-		m2 = m1;
-		m1 = tmp;
-    }
-	t1 = Date.now();
-	document.getElementById('log').innerHTML += "sylvester determinant: " + (t1-t0) + "ms<br>";
+	document.getElementById('log').innerHTML += "sylvester determinant: " + Testsylvester.determinant(COUNT) + "ms<br>";
 	
 	document.getElementById('log').innerHTML += "=============================================================== <br>";
 	
-	var v1 = (new v3).setElements([1,2,3]);
-	m1 = m4x4.I().rand();
-	m2 = m4x4.I().rand();
-	m3 = m4x4.I().rand();
-	t0 = Date.now();
-    for (var i = 0; i < COUNT; ++i) {
-		m1.translate(v1);
-		
-		tmp = m3;
-		m3 = m2;
-		m2 = m1;
-		m1 = tmp;
-    }
-    t1 = Date.now();
-	document.getElementById('log').innerHTML += "translate: " + (t1-t0) + "ms<br>";
+	document.getElementById('log').innerHTML += "translate: " + TestEWGL.translate(COUNT) + "ms<br>";
 	
-	v1 = [1,2,3];
-	m1 = randMatrix();
-	m2 = randMatrix();
-	m3 = randMatrix();
-	t0 = Date.now();
-	for (var i = 0; i < COUNT; ++i) {
-	    M4x4.translate(v1,m1,m1);
-		
-		tmp = m3;
-		m3 = m2;
-		m2 = m1;
-		m1 = tmp;
-    }
-	t1 = Date.now();
-	document.getElementById('log').innerHTML += "mjs translate: " + (t1-t0) + "ms<br>";
+	document.getElementById('log').innerHTML += "mjs translate: " + Testmjs.translate(COUNT) + "ms<br>";
 	
-	v1 = $V([1, 2, 3]);
-	m1 = Matrix.Random(4,4);
-	m2 = Matrix.Random(4,4);
-	m3 = Matrix.Random(4,4);
-	t0 = Date.now();
-	for (var i = 0; i < COUNT; ++i) {
-		m1.x(Matrix.Translation(v1).ensure4x4());
-	 
-		tmp = m3;
-		m3 = m2;
-		m2 = m1;
-		m1 = tmp;
-    }
-	t1 = Date.now();
-	document.getElementById('log').innerHTML += "sylvester translate: " + (t1-t0) + "ms<br>";
+	document.getElementById('log').innerHTML += "sylvester translate: " + Testsylvester.translate(COUNT) + "ms<br>";
 	
 	document.getElementById('log').innerHTML += "=============================================================== <br>";
 	
-	var v1 = (new v3).setElements([1,2,3]);
-	m1 = m4x4.I().rand();
-	m2 = m4x4.I().rand();
-	m3 = m4x4.I().rand();
-	t0 = Date.now();
-    for (var i = 0; i < COUNT; ++i) {
-		m1.rotate(90,v1);
-		
-		tmp = m3;
-		m3 = m2;
-		m2 = m1;
-		m1 = tmp;
-    }
-    t1 = Date.now();
-	document.getElementById('log').innerHTML += "rotate: " + (t1-t0) + "ms<br>";
+	document.getElementById('log').innerHTML += "rotate: " + TestEWGL.rotate(COUNT) + "ms<br>";
 	
-	v1 = [1,2,3];
-	m1 = randMatrix();
-	m2 = randMatrix();
-	m3 = randMatrix();
-	t0 = Date.now();
-	for (var i = 0; i < COUNT; ++i) {
-	    M4x4.translate(90,v1,m1,m1);
-		
-		tmp = m3;
-		m3 = m2;
-		m2 = m1;
-		m1 = tmp;
-    }
-	t1 = Date.now();
-	document.getElementById('log').innerHTML += "mjs rotate: " + (t1-t0) + "ms<br>";
+	document.getElementById('log').innerHTML += "mjs rotate: " + Testmjs.rotate(COUNT) + "ms<br>";
 	
-	v1 = $V([1, 2, 3]);
-	m1 = Matrix.Random(4,4);
-	m2 = Matrix.Random(4,4);
-	m3 = Matrix.Random(4,4);
-	t0 = Date.now();
-	for (var i = 0; i < COUNT; ++i) {
-		m1.x(Matrix.Rotation(90,v1).ensure4x4());
-	 
-		tmp = m3;
-		m3 = m2;
-		m2 = m1;
-		m1 = tmp;
-    }
-	t1 = Date.now();
-	document.getElementById('log').innerHTML += "sylvester rotate: " + (t1-t0) + "ms<br>";
+	document.getElementById('log').innerHTML += "sylvester rotate: " + Testsylvester.rotate(COUNT) + "ms<br>";
 	
 	document.getElementById('log').innerHTML += "=============================================================== <br>";
 	
-	m1 = m4x4.I().rand();
-	m2 = m4x4.I().rand();
-	m3 = m4x4.I().rand();
-	t0 = Date.now();
-    for (var i = 0; i < COUNT; ++i) {
-		m1.setElements(m2.elements);
-	 
-		tmp = m3;
-		m3 = m2;
-		m2 = m1;
-		m1 = tmp;
-    }
-    t1 = Date.now();
-	document.getElementById('log').innerHTML += "setElements: " + (t1-t0) + "ms<br>";
+	document.getElementById('log').innerHTML += "setElements: " + TestEWGL.setelements(COUNT) + "ms<br>";
 	
-	m1 = randMatrix();
-	m2 = randMatrix();
-	m3 = randMatrix();
-	t0 = Date.now();
-	for (var i = 0; i < COUNT; ++i) {
-	    m1 = M4x4.$(1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4);
-		
-		tmp = m3;
-		m3 = m2;
-		m2 = m1;
-		m1 = tmp;
-    }
-	t1 = Date.now();
-	document.getElementById('log').innerHTML += "mjs setElements: " + (t1-t0) + "ms<br>";
+	document.getElementById('log').innerHTML += "mjs setElements: " + Testmjs.setelements(COUNT) + "ms<br>";
 	
-	m1 = Matrix.Random(4,4);
-	m2 = Matrix.Random(4,4);
-	m3 = Matrix.Random(4,4);
-	t0 = Date.now();
-	for (var i = 0; i < COUNT; ++i) {
-		m1.setElements(m2.elements);
-	 
-		tmp = m3;
-		m3 = m2;
-		m2 = m1;
-		m1 = tmp;
-    }
-	t1 = Date.now();
-	document.getElementById('log').innerHTML += "sylvester setelements: " + (t1-t0) + "ms<br>";
+	document.getElementById('log').innerHTML += "sylvester setelements: " + Testsylvester.setelements(COUNT) + "ms<br>";
 	
 	document.getElementById('log').innerHTML += "=============================================================== <br>";
 
