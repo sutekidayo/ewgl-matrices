@@ -518,6 +518,30 @@
 		return matrix.set(r);
 	};
 	
+	matrix.makeTranslate = function(vector){
+		var translate = vector.elements ? vector.elements : vector,
+			r = [];
+			
+		r[0] = 1;
+		r[1] = 0;
+		r[2] = 0;
+		r[3] = 0;
+		r[4] = 0;
+		r[5] = 1;
+		r[6] = 0;
+		r[7] = 0;
+		r[8] = 0;
+		r[9] = 0;
+		r[10] = 1;
+		r[11] = 0;
+		r[12] = translate[0];
+		r[13] = translate[1];
+		r[14] = translate[2];
+		r[15] = 1;
+
+		return matrix.set(r);
+	};
+	
 	
 	window.m4x4 = matrix;
 	
