@@ -2,8 +2,8 @@
 	var precision = 1e-6;
 	var identitymatrix =  [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1];
 
-	var matrix = function(){
-		this.elements = new WebGLFloatArray(identitymatrix);
+	var matrix = function(els){
+		this.elements = new WebGLFloatArray(els || identitymatrix);
 		return this;
 	};
 	
@@ -82,7 +82,7 @@
 	};
 	
 	matrix.prototype.dup = function(){
-		return (new matrix()).setElements(this.elements);
+		return (new matrix(this.elements));
 	};
 	
 	matrix.prototype.map =  function(fn) {
@@ -199,24 +199,24 @@
 			m28 =  t*x*z - s*y, m29 =  t*y*z + s*x, m210 = t*z*z + c;
 			
 		this.elements[0] = m10 * m20 + m11 * m24 + m12 * m28;
-		this.elements[0] = m14 * m20 + m15 * m24 + m16 * m28;
-		this.elements[0] = m18 * m20 + m19 * m24 + m110 * m28;
-		this.elements[0] = m112 * m20 + m113 * m24 + m114 * m28;
+		this.elements[1] = m14 * m20 + m15 * m24 + m16 * m28;
+		this.elements[2] = m18 * m20 + m19 * m24 + m110 * m28;
+		this.elements[3] = m112 * m20 + m113 * m24 + m114 * m28;
 				
-		this.elements[0] = m10 * m21 + m11 * m25 + m12 * m29;
-		this.elements[0] = m14 * m21 + m15 * m25 + m16 * m29;
-		this.elements[0] = m18 * m21 + m19 * m25 + m110 * m29;
-		this.elements[0] = m112 * m21 + m113 * m25 + m114 * m29;		
+		this.elements[4] = m10 * m21 + m11 * m25 + m12 * m29;
+		this.elements[5] = m14 * m21 + m15 * m25 + m16 * m29;
+		this.elements[6] = m18 * m21 + m19 * m25 + m110 * m29;
+		this.elements[7] = m112 * m21 + m113 * m25 + m114 * m29;		
 				
-		this.elements[0] = m10 * m22 + m11 * m26 + m12 * m210;
-		this.elements[0] = m14 * m22 + m15 * m26 + m16 * m210;
-		this.elements[0] = m18 * m22 + m19 * m26 + m110 * m210;
-		this.elements[0] = m112 * m22 + m113 * m26 + m114 * m210;
+		this.elements[8] = m10 * m22 + m11 * m26 + m12 * m210;
+		this.elements[9] = m14 * m22 + m15 * m26 + m16 * m210;
+		this.elements[10] = m18 * m22 + m19 * m26 + m110 * m210;
+		this.elements[11] = m112 * m22 + m113 * m26 + m114 * m210;
 				
-		this.elements[0] = m13;
-		this.elements[0] = m17;
-		this.elements[0] = m111;
-		this.elements[0] = m115;
+		this.elements[12] = m13;
+		this.elements[13] = m17;
+		this.elements[14] = m111;
+		this.elements[15] = m115;
 		
 		return this;
 	}
@@ -394,7 +394,7 @@
 										arguments[4],arguments[5],arguments[6],arguments[7],
 										arguments[8],arguments[9],arguments[10],arguments[11],
 										arguments[12],arguments[13],arguments[14],arguments[15]] : arguments[0];
-		return 	(new matrix()).setElements(elements);
+		return 	(new matrix(elements));
 	}
 	matrix.makeFrustum = function (left, right, bottom, top, znear, zfar){
 	
