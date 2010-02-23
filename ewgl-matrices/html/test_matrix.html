@@ -17,90 +17,86 @@
 <script>
 
 function go() {
-	var t0,t1,
-		m1,
-		m2,
-		m3,
-		tmp;
 	const COUNT = 200000;
 	
-	document.getElementById('log').innerHTML += "multiply: " + TestEWGL.multiply(COUNT) + "ms<br>";
+	document.getElementById('log').innerHTML += "EWGL multiply: " + TestEWGL.multiply(COUNT) + " ms<br>";
 	
-	document.getElementById('log').innerHTML += "mjs multiply: " + Testmjs.multiply(COUNT) + "ms<br>";
+	document.getElementById('log').innerHTML += "mjs multiply: " + Testmjs.multiply(COUNT) + " ms<br>";
 	
-	document.getElementById('log').innerHTML += "mjs1 multiply: " + Testmjs.multiply1(COUNT) + "ms<br>";
+	document.getElementById('log').innerHTML += "mjs1 multiply: " + Testmjs.multiply1(COUNT) + " ms<br>";
 	
-	document.getElementById('log').innerHTML += "sylvester multiply: " + Testsylvester.multiply(COUNT) + "ms<br>";
-	
-	document.getElementById('log').innerHTML += "=============================================================== <br>";
-
-	document.getElementById('log').innerHTML += "inverse: " + TestEWGL.inverse(COUNT) + "ms<br>";
-	
-	document.getElementById('log').innerHTML += "mjs inverse: " + Testmjs.inverse(COUNT) + "ms<br>";
-	
-	document.getElementById('log').innerHTML += "sylvester inverse: " + Testsylvester.inverse(COUNT) + "ms<br>";
-	
-	document.getElementById('log').innerHTML += "=============================================================== <br>";
-	
-	document.getElementById('log').innerHTML += "dup: " + TestEWGL.duplicate(COUNT) + "ms<br>";
-	
-	document.getElementById('log').innerHTML += "mjs clone: " + Testmjs.duplicate(COUNT) + "ms<br>";
-	
-	document.getElementById('log').innerHTML += "sylvester clone: " + Testsylvester.duplicate(COUNT) + "ms<br>";
-	
-	document.getElementById('log').innerHTML += "=============================================================== <br>";
-	
-	document.getElementById('log').innerHTML += "transpose: " + TestEWGL.transpose(COUNT) + "ms<br>";
-	
-	document.getElementById('log').innerHTML += "mjs transpose: " + Testmjs.transpose(COUNT) + "ms<br>";
-	
-	document.getElementById('log').innerHTML += "sylvester transpose: " + Testsylvester.transpose(COUNT) + "ms<br>";
-	
-	document.getElementById('log').innerHTML += "=============================================================== <br>";
-	
-	document.getElementById('log').innerHTML += "eql always true: " + TestEWGL.equal(COUNT) + "ms<br>";
-	
-	document.getElementById('log').innerHTML += "sylvester eql always true: " + Testsylvester.equal(COUNT) + "ms<br>";
-	
-	document.getElementById('log').innerHTML += "=============================================================== <br>";
-	
-	document.getElementById('log').innerHTML += "determinant: " + TestEWGL.determinant(COUNT) + "ms<br>";
-	
-	document.getElementById('log').innerHTML += "sylvester determinant: " + Testsylvester.determinant(COUNT) + "ms<br>";
-	
-	document.getElementById('log').innerHTML += "=============================================================== <br>";
-	
-	document.getElementById('log').innerHTML += "translate: " + TestEWGL.translate(COUNT) + "ms<br>";
-	
-	document.getElementById('log').innerHTML += "mjs translate: " + Testmjs.translate(COUNT) + "ms<br>";
-	
-	document.getElementById('log').innerHTML += "sylvester translate: " + Testsylvester.translate(COUNT) + "ms<br>";
-	
-	document.getElementById('log').innerHTML += "=============================================================== <br>";
-	
-	document.getElementById('log').innerHTML += "rotate: " + TestEWGL.rotate(COUNT) + "ms<br>";
-	
-	document.getElementById('log').innerHTML += "mjs rotate: " + Testmjs.rotate(COUNT) + "ms<br>";
-	
-	document.getElementById('log').innerHTML += "sylvester rotate: " + Testsylvester.rotate(COUNT) + "ms<br>";
-	
-	document.getElementById('log').innerHTML += "=============================================================== <br>";
-	
-	document.getElementById('log').innerHTML += "setElements: " + TestEWGL.setelements(COUNT) + "ms<br>";
-	
-	document.getElementById('log').innerHTML += "mjs setElements: " + Testmjs.setelements(COUNT) + "ms<br>";
-	
-	document.getElementById('log').innerHTML += "sylvester setelements: " + Testsylvester.setelements(COUNT) + "ms<br>";
+	document.getElementById('log').innerHTML += "sylvester multiply: " + Testsylvester.multiply(COUNT) + " ms<br>";
 	
 	document.getElementById('log').innerHTML += "=============================================================== <br>";
 
+	document.getElementById('log').innerHTML += "EWGL inverse: " + TestEWGL.inverse(COUNT) + " ms<br>";
+	
+	document.getElementById('log').innerHTML += "mjs inverse: " + Testmjs.inverse(COUNT) + " ms<br>";
+	
+	document.getElementById('log').innerHTML += "sylvester inverse: " + Testsylvester.inverse(COUNT) + " ms<br>";
+	
+	document.getElementById('log').innerHTML += "=============================================================== <br>";
+	
+	document.getElementById('log').innerHTML += "EWGL dup: " + TestEWGL.duplicate(COUNT) + " ms<br>";
+	
+	document.getElementById('log').innerHTML += "mjs clone: " + Testmjs.duplicate(COUNT) + " ms<br>";
+	
+	document.getElementById('log').innerHTML += "sylvester clone: " + Testsylvester.duplicate(COUNT) + " ms<br>";
+	
+	document.getElementById('log').innerHTML += "=============================================================== <br>";
+	
+	document.getElementById('log').innerHTML += "EWGL transpose: " + TestEWGL.transpose(COUNT) + " ms<br>";
+	
+	document.getElementById('log').innerHTML += "mjs transpose: " + Testmjs.transpose(COUNT) + " ms<br>";
+	
+	document.getElementById('log').innerHTML += "sylvester transpose: " + Testsylvester.transpose(COUNT) + " ms<br>";
+	
+	document.getElementById('log').innerHTML += "=============================================================== <br>";
+	
+	document.getElementById('log').innerHTML += "EWGL eql always true: " + TestEWGL.equal(COUNT) + " ms<br>";
+	
+	document.getElementById('log').innerHTML += "sylvester eql always true: " + Testsylvester.equal(COUNT) + " ms<br>";
+	
+	document.getElementById('log').innerHTML += "=============================================================== <br>";
+	
+	document.getElementById('log').innerHTML += "EWGL determinant: " + TestEWGL.determinant(COUNT) + " ms<br>";
+	
+	document.getElementById('log').innerHTML += "sylvester determinant: " + Testsylvester.determinant(COUNT) + " ms<br>";
+	
+	document.getElementById('log').innerHTML += "=============================================================== <br>";
+	
+	document.getElementById('log').innerHTML += "EWGL translate: " + TestEWGL.translate(COUNT) + " ms<br>";
+	
+	document.getElementById('log').innerHTML += "mjs translate: " + Testmjs.translate(COUNT) + " ms<br>";
+	
+	document.getElementById('log').innerHTML += "sylvester translate: " + Testsylvester.translate(COUNT) + " ms<br>";
+	
+	document.getElementById('log').innerHTML += "=============================================================== <br>";
+	
+	document.getElementById('log').innerHTML += "EWGL rotate: " + TestEWGL.rotate(COUNT) + " ms<br>";
+	
+	document.getElementById('log').innerHTML += "mjs rotate: " + Testmjs.rotate(COUNT) + " ms<br>";
+	
+	document.getElementById('log').innerHTML += "sylvester rotate: " + Testsylvester.rotate(COUNT) + " ms<br>";
+	
+	document.getElementById('log').innerHTML += "=============================================================== <br>";
+	
+	document.getElementById('log').innerHTML += "EWGL setElements: " + TestEWGL.setelements(COUNT) + " ms<br>";
+	
+	document.getElementById('log').innerHTML += "mjs setElements: " + Testmjs.setelements(COUNT) + " ms<br>";
+	
+	document.getElementById('log').innerHTML += "sylvester setelements: " + Testsylvester.setelements(COUNT) + " ms<br>";
+	
+	document.getElementById('log').innerHTML += "=============================================================== <br>";
+	
+/*
 	t0 = Date.now();
     for (var i = 0; i < COUNT; ++i) {
 		m4x4.makePerspective(45,1,1,100);
     }
     t1 = Date.now();
 	document.getElementById('log').innerHTML += "makePerspective: " + (t1-t0) + "ms<br>";
-}	
+*/}	
 </script>
 
 </head>

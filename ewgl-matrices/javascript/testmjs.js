@@ -156,3 +156,32 @@ Testmjs.setelements = function(count){
 	var t1 = Date.now();
 	return t1-t0;
 }
+Testmjs.realLifeTest = function(count){
+	var m1 = randMatrix(),
+		m2 = randMatrix(),
+		m3 = randMatrix(),
+		vector1 = V3.$([1,2,3]),
+		vector2 = V3.$([1,2,3]),
+		vector3 = V3.$([-4,-2,-1]),
+		vector4 = V3.$([-4,-2,-1]),
+		t0 = Date.now();
+	for (var i = 0; i < count; ++i) {
+		m1 = M4x4.I;
+		M4x4.translate(vector1,m1,m2)
+		M4x4.rotate(Math.PI/2,vector2,m2,m1);
+		M4x4.translate(vector3,m1,m2)
+		M4x4.rotate(Math.PI/3,vector4,m2,m1);
+		M4x4.translate(vector1,m1,m2)
+		M4x4.rotate(Math.PI/2,vector2,m2,m1);
+		M4x4.translate(vector3,m1,m2)
+		M4x4.rotate(Math.PI/3,vector4,m2,m1);
+		m1.elements;
+	 
+		tmp = m3;
+		m3 = m2;
+		m2 = m1;
+		m1 = tmp;
+    }
+	var t1 = Date.now();
+	return t1-t0;
+}

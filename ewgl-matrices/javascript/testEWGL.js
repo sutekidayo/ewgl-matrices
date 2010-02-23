@@ -155,3 +155,29 @@ TestEWGL.setelements = function(count){
 	var t1 = Date.now();
 	return t1-t0;
 }
+
+TestEWGL.realLifeTest = function(count){
+	var m1 = m4x4.I().rand(),
+		m2 = m4x4.I().rand(),
+		m3 = m4x4.I().rand(),
+		vector1 = v3.set([1,2,3]),
+		vector2 = v3.set([1,2,3]),
+		vector3 = v3.set([-4,-2,-1]),
+		vector4 = v3.set([-4,-2,-1]),
+		t0 = Date.now();
+	for (var i = 0; i < count; ++i) {
+		m1 = m4x4.I();
+		m1.translate(vector1).rotate(Math.PI/2,vector2);
+		m1.translate(vector3).rotate(Math.PI/3,vector4);
+		m1.translate(vector1).rotate(Math.PI/2,vector2);
+		m1.translate(vector3).rotate(Math.PI/3,vector4);
+		m1.elements;
+	 
+		tmp = m3;
+		m3 = m2;
+		m2 = m1;
+		m1 = tmp;
+    }
+	var t1 = Date.now();
+	return t1-t0;
+}
