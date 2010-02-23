@@ -86,11 +86,11 @@
 	};
 	
 	matrix.prototype.map =  function(fn) {
-		var els = [],i = 16;
+		var i = 16;
 		while (i--){
-			els[i] = fn(this.elements[i],parseInt(i/4)+1,i%4+1);
+			this.elements[i] = fn(this.elements[i],parseInt(i/4)+1,i%4+1);
 		}
-		return new matrix().setElements(els);
+		return this;
 	}
 	
 	matrix.prototype.add = function(matrix){
@@ -546,7 +546,7 @@
 	window.m4x4 = matrix;
 	
 	var vector = function(){
-		this.elements = new WebGLFloatArray([0,0,0]);
+		this.elements = new WebGLFloatArray(arguments[0] || [0,0,0]);
 		return this;
 	};
 	
@@ -622,7 +622,7 @@
 	
 	vector.set =function(){
 		var elements = arguments[2] ? [arguments[0],arguments[1],arguments[2]] : arguments[0];
-		return 	(new matrix()).setElements(elements);
+		return 	(new matrix(elements));
 	}
 	
 	window.v3 = vector;
