@@ -18,11 +18,13 @@
 	};
 	
 	matrix.prototype.row = function(i){
-		return [this.elements[i-1],this.elements[3+i],this.elements[7+i],this.elements[11+i]];
+		var e = this.elements;
+		return [e[i-1],e[3+i],e[7+i],e[11+i]];
 	};
 
 	matrix.prototype.col = function(i){
-		return [this.elements[i*4-4],this.elements[i*4-3],this.elements[i*4-2],this.elements[i*4-1]];
+		var e = this.elements;
+		return [e[i*4-4],e[i*4-3],e[i*4-2],e[i*4-1]];
 	};
 	
 	matrix.prototype.dimensions = function() {
@@ -59,25 +61,28 @@
 	};
 	
 	matrix.prototype.setElements = function(els){
-		this.elements[0] = els[0];
-		this.elements[1] = els[1];
-		this.elements[2] = els[2];
-		this.elements[3] = els[3];
+		var e = this.elements;
 		
-		this.elements[4] = els[4];
-		this.elements[5] = els[5];
-		this.elements[6] = els[6];
-		this.elements[7] = els[7];
+		e[0] = els[0];
+		e[1] = els[1];
+		e[2] = els[2];
+		e[3] = els[3];
 		
-		this.elements[8] = els[8];
-		this.elements[9] = els[9];
-		this.elements[10] = els[10];
-		this.elements[11] = els[11];
+		e[4] = els[4];
+		e[5] = els[5];
+		e[6] = els[6];
+		e[7] = els[7];
 		
-		this.elements[12] = els[12];
-		this.elements[13] = els[13];
-		this.elements[14] = els[14];
-		this.elements[15] = els[15];
+		e[8] = els[8];
+		e[9] = els[9];
+		e[10] = els[10];
+		e[11] = els[11];
+		
+		e[12] = els[12];
+		e[13] = els[13];
+		e[14] = els[14];
+		e[15] = els[15];
+		
 		return this;
 	};
 	
@@ -86,26 +91,76 @@
 	};
 	
 	matrix.prototype.map =  function(fn) {
-		var i = 16;
-		while (i--){
-			this.elements[i] = fn(this.elements[i],parseInt(i/4)+1,i%4+1);
-		}
+		var e = this.elements;
+		
+		e[0] = fn(e[0], 0, 0)
+		e[1] = fn(e[1], 0, 1)               
+		e[2] = fn(e[2], 0, 2)
+		e[3] = fn(e[3], 0, 3)
+
+		e[4] = fn(e[4], 1, 0)
+		e[5] = fn(e[5], 1, 1)
+		e[6] = fn(e[6], 1, 2)
+		e[7] = fn(e[7], 1, 3)
+
+		e[8] = fn(e[8], 2, 0)
+		e[9] = fn(e[9], 2, 1)
+		e[10] = fn(e[10], 2, 2)
+		e[11] = fn(e[11], 2, 3)
+
+		e[12] = fn(e[12], 3, 0)
+		e[13] = fn(e[13], 3, 1)
+		e[14] = fn(e[14], 3, 2)
+		e[15] = fn(e[15], 3, 3)
+
 		return this;
 	}
 	
 	matrix.prototype.add = function(matrix){
-		var els1 = this.elements,els2 = matrix.elements,i = 16;
-		while(i--){
-			this.elements[i] = els1[i]+els2[i];
-		}
+
+		var els1 = this.elements, els2 = matrix.elements;
+
+		els1[0] = els1[0]+els2[0];
+		els1[1] = els1[1]+els2[1];
+		els1[2] = els1[2]+els2[2];
+		els1[3] = els1[3]+els2[3];
+		els1[4] = els1[4]+els2[4];
+		els1[5] = els1[5]+els2[5];
+		els1[6] = els1[6]+els2[6];
+		els1[7] = els1[7]+els2[7];
+		els1[8] = els1[8]+els2[8];
+		els1[9] = els1[9]+els2[9];
+		els1[10] = els1[10]+els2[10];
+		els1[11] = els1[11]+els2[11];
+		els1[12] = els1[12]+els2[12];
+		els1[14] = els1[13]+els2[13];
+		els1[14] = els1[14]+els2[14];
+        els1[15] = els1[15]+els2[15];
+		
 		return this;
 	}
 	
 	matrix.prototype.substract =function(matrix){
-		var els1 = this.elements,els2 = matrix.elements,i = 16;
-		while(i--){
-			this.elements[i] = els1[i]-els2[i];
-		}
+	
+		var els1 = this.elements,els2 = matrix.elements;
+
+		els1[0] = els1[0]-els2[0];
+		els1[1] = els1[1]-els2[1];
+		els1[2] = els1[2]-els2[2];
+		els1[3] = els1[3]-els2[3];
+		els1[4] = els1[4]-els2[4];
+		els1[5] = els1[5]-els2[5];
+		els1[6] = els1[6]-els2[6];
+		els1[7] = els1[7]-els2[7];
+		els1[8] = els1[8]-els2[8];
+		els1[9] = els1[9]-els2[9];
+		els1[10] = els1[10]-els2[10];
+		els1[11] = els1[11]-els2[11];
+		els1[12] = els1[12]-els2[12];
+		els1[14] = els1[13]-els2[13];
+		els1[14] = els1[14]-els2[14];
+        els1[15] = els1[15]-els2[15];
+		
 		return this;
 	}
 	
@@ -123,25 +178,25 @@
 		
 		
 
-		this.elements[0] = m10 * m20 + m11 * m24 + m12 * m28 + m13 * m212;
-		this.elements[1] = m14 * m20 + m15 * m24 + m16 * m28 + m17 * m212;
-		this.elements[2] = 	m18 * m20 + m19 * m24 + m110 * m28 + m111 * m212;
-		this.elements[3] = 	m112 * m20 + m113 * m24 + m114 * m28 + m115 * m212;
+		m1[0] = m10 * m20 + m11 * m24 + m12 * m28 + m13 * m212;
+		m1[1] = m14 * m20 + m15 * m24 + m16 * m28 + m17 * m212;
+		m1[2] = 	m18 * m20 + m19 * m24 + m110 * m28 + m111 * m212;
+		m1[3] = 	m112 * m20 + m113 * m24 + m114 * m28 + m115 * m212;
 				
-		this.elements[4] = 	m10 * m21 + m11 * m25 + m12 * m29 + m13 * m213;
-		this.elements[5] = 	m14 * m21 + m15 * m25 + m16 * m29 + m17 * m213;
-		this.elements[6] = 	m18 * m21 + m19 * m25 + m110 * m29 + m111 * m213;
-		this.elements[7] = 	m112 * m21 + m113 * m25 + m114 * m29 + m115 * m213;			
+		m1[4] = 	m10 * m21 + m11 * m25 + m12 * m29 + m13 * m213;
+		m1[5] = 	m14 * m21 + m15 * m25 + m16 * m29 + m17 * m213;
+		m1[6] = 	m18 * m21 + m19 * m25 + m110 * m29 + m111 * m213;
+		m1[7] = 	m112 * m21 + m113 * m25 + m114 * m29 + m115 * m213;			
 			
-		this.elements[8] = 	m10 * m22 + m11 * m26 + m12 * m210 + m13 * m214;
-		this.elements[9] = 	m14 * m22 + m15 * m26 + m16 * m210 + m17 * m214;
-		this.elements[10] = m18 * m22 + m19 * m26 + m110 * m210 + m111 * m214;
-		this.elements[11] = m112 * m22 + m113 * m26 + m114 * m210 + m115 * m214;
+		m1[8] = 	m10 * m22 + m11 * m26 + m12 * m210 + m13 * m214;
+		m1[9] = 	m14 * m22 + m15 * m26 + m16 * m210 + m17 * m214;
+		m1[10] = m18 * m22 + m19 * m26 + m110 * m210 + m111 * m214;
+		m1[11] = m112 * m22 + m113 * m26 + m114 * m210 + m115 * m214;
 			
-		this.elements[12] = m10 * m23 + m11 * m27 + m12 * m211 + m13 * m215;
-		this.elements[13] = m14 * m23 + m15 * m27 + m16 * m211 + m17 * m215;
-		this.elements[14] = m18 * m23 + m19 * m27 + m110 * m211 + m111 * m215;
-		this.elements[15] = m112 * m23 + m113 * m27 + m114 * m211 + m115 * m215;
+		m1[12] = m10 * m23 + m11 * m27 + m12 * m211 + m13 * m215;
+		m1[13] = m14 * m23 + m15 * m27 + m16 * m211 + m17 * m215;
+		m1[14] = m18 * m23 + m19 * m27 + m110 * m211 + m111 * m215;
+		m1[15] = m112 * m23 + m113 * m27 + m114 * m211 + m115 * m215;
 		
 		return this;
 	};
@@ -157,25 +212,25 @@
 		
 		
 
-		this.elements[0] = m10;
-		this.elements[1] = m14;
-		this.elements[2] = 	m18;
-		this.elements[3] = 	m112;
+		m1[0] = m10;
+		m1[1] = m14;
+		m1[2] = 	m18;
+		m1[3] = 	m112;
 				
-		this.elements[4] = 	m11;
-		this.elements[5] = 	m15;
-		this.elements[6] = 	m19;
-		this.elements[7] = 	m113;			
+		m1[4] = 	m11;
+		m1[5] = 	m15;
+		m1[6] = 	m19;
+		m1[7] = 	m113;			
 			
-		this.elements[8] = 	m12;
-		this.elements[9] = 	m16;
-		this.elements[10] = m110;
-		this.elements[11] = m114;
+		m1[8] = 	m12;
+		m1[9] = 	m16;
+		m1[10] = m110;
+		m1[11] = m114;
 			
-		this.elements[12] = m10 * m23 + m11 * m27 + m12 * m211 + m13;
-		this.elements[13] = m14 * m23 + m15 * m27 + m16 * m211 + m17;
-		this.elements[14] = m18 * m23 + m19 * m27 + m110 * m211 + m111;
-		this.elements[15] = m112 * m23 + m113 * m27 + m114 * m211 + m115;
+		m1[12] = m10 * m23 + m11 * m27 + m12 * m211 + m13;
+		m1[13] = m14 * m23 + m15 * m27 + m16 * m211 + m17;
+		m1[14] = m18 * m23 + m19 * m27 + m110 * m211 + m111;
+		m1[15] = m112 * m23 + m113 * m27 + m114 * m211 + m115;
 		
 		return this;
 	};
@@ -198,25 +253,25 @@
 			m24 =  t*x*y + s*z, m25 =  t*y*y + c,   m26 =  t*y*z - s*x,
 			m28 =  t*x*z - s*y, m29 =  t*y*z + s*x, m210 = t*z*z + c;
 			
-		this.elements[0] = m10 * m20 + m11 * m24 + m12 * m28;
-		this.elements[1] = m14 * m20 + m15 * m24 + m16 * m28;
-		this.elements[2] = m18 * m20 + m19 * m24 + m110 * m28;
-		this.elements[3] = m112 * m20 + m113 * m24 + m114 * m28;
+		m1[0] = m10 * m20 + m11 * m24 + m12 * m28;
+		m1[1] = m14 * m20 + m15 * m24 + m16 * m28;
+		m1[2] = m18 * m20 + m19 * m24 + m110 * m28;
+		m1[3] = m112 * m20 + m113 * m24 + m114 * m28;
 				
-		this.elements[4] = m10 * m21 + m11 * m25 + m12 * m29;
-		this.elements[5] = m14 * m21 + m15 * m25 + m16 * m29;
-		this.elements[6] = m18 * m21 + m19 * m25 + m110 * m29;
-		this.elements[7] = m112 * m21 + m113 * m25 + m114 * m29;		
+		m1[4] = m10 * m21 + m11 * m25 + m12 * m29;
+		m1[5] = m14 * m21 + m15 * m25 + m16 * m29;
+		m1[6] = m18 * m21 + m19 * m25 + m110 * m29;
+		m1[7] = m112 * m21 + m113 * m25 + m114 * m29;		
 				
-		this.elements[8] = m10 * m22 + m11 * m26 + m12 * m210;
-		this.elements[9] = m14 * m22 + m15 * m26 + m16 * m210;
-		this.elements[10] = m18 * m22 + m19 * m26 + m110 * m210;
-		this.elements[11] = m112 * m22 + m113 * m26 + m114 * m210;
+		m1[8] = m10 * m22 + m11 * m26 + m12 * m210;
+		m1[9] = m14 * m22 + m15 * m26 + m16 * m210;
+		m1[10] = m18 * m22 + m19 * m26 + m110 * m210;
+		m1[11] = m112 * m22 + m113 * m26 + m114 * m210;
 				
-		this.elements[12] = m13;
-		this.elements[13] = m17;
-		this.elements[14] = m111;
-		this.elements[15] = m115;
+		m1[12] = m13;
+		m1[13] = m17;
+		m1[14] = m111;
+		m1[15] = m115;
 		
 		return this;
 	}
@@ -232,25 +287,25 @@
 			
 			m20 = s[0], m25 = s[1], m210 = s[2];
 			
-		this.elements[0] = m10 * m20;
-		this.elements[1] = m14 * m20;
-		this.elements[2] = 	m18 * m20;
-		this.elements[3] = 	m112 * m20;
+		m1[0] = m10 * m20;
+		m1[1] = m14 * m20;
+		m1[2] = 	m18 * m20;
+		m1[3] = 	m112 * m20;
 				
-		this.elements[4] = 	m11 * m25;
-		this.elements[5] = 	m15 * m25;
-		this.elements[6] = 	m19 * m25;
-		this.elements[7] = 	m113 * m25;			
+		m1[4] = 	m11 * m25;
+		m1[5] = 	m15 * m25;
+		m1[6] = 	m19 * m25;
+		m1[7] = 	m113 * m25;			
 			
-		this.elements[8] = 	m12 * m210;
-		this.elements[9] = 	m16 * m210;
-		this.elements[10] = m110 * m210;
-		this.elements[11] = m114 * m210;
+		m1[8] = 	m12 * m210;
+		m1[9] = 	m16 * m210;
+		m1[10] = m110 * m210;
+		m1[11] = m114 * m210;
 			
-		this.elements[12] = m13;
-		this.elements[13] = m17;
-		this.elements[14] = m111;
-		this.elements[15] = m115;
+		m1[12] = m13;
+		m1[13] = m17;
+		m1[14] = m111;
+		m1[15] = m115;
 		
 		return this;
 	};
@@ -260,28 +315,28 @@
 		var e = this.elements,
 		
 		k = e[1];
-		this.elements[1] = e[4];
-		this.elements[4] = k;
+		e[1] = e[4];
+		e[4] = k;
 		
 		k = e[2];
-		this.elements[2] = e[8];
-		this.elements[8] = k;
+		e[2] = e[8];
+		e[8] = k;
 		
 		k = e[3];
-		this.elements[3] = e[12];
-		this.elements[12] = k;	
+		e[3] = e[12];
+		e[12] = k;	
 		
 		k = e[6];
-		this.elements[6] = e[9];
-		this.elements[9] = k;
+		e[6] = e[9];
+		e[9] = k;
 		
 		k = e[7];		
-		this.elements[7] = e[13];
-		this.elements[13] = k;
+		e[7] = e[13];
+		e[13] = k;
 		
 		k = e[11];
-		this.elements[11] = e[14];
-		this.elements[14] = k;
+		e[11] = e[14];
+		e[14] = k;
 		
 		return this;
 	};
@@ -347,25 +402,25 @@
 			m20 =  m1[2], m21 =  m1[6], m22 =  m1[10], m23 = m1[14],
 			m30 =  m1[3], m31 =  m1[7], m32 =  m1[11], m33 = m1[15];
 			
-		this.elements[0] = ( m12*m23*m31 - m13*m22*m31 + m13*m21*m32 - m11*m23*m32 - m12*m21*m33 + m11*m22*m33)/d;
-		this.elements[1] = ( m13*m22*m30 - m12*m23*m30 - m13*m20*m32 + m10*m23*m32 + m12*m20*m33 - m10*m22*m33)/d;
-		this.elements[2] = ( m11*m23*m30 - m13*m21*m30 + m13*m20*m31 - m10*m23*m31 - m11*m20*m33 + m10*m21*m33)/d;
-		this.elements[3] = ( m12*m21*m30 - m11*m22*m30 - m12*m20*m31 + m10*m22*m31 + m11*m20*m32 - m10*m21*m32)/d;
+		m1[0] = ( m12*m23*m31 - m13*m22*m31 + m13*m21*m32 - m11*m23*m32 - m12*m21*m33 + m11*m22*m33)/d;
+		m1[1] = ( m13*m22*m30 - m12*m23*m30 - m13*m20*m32 + m10*m23*m32 + m12*m20*m33 - m10*m22*m33)/d;
+		m1[2] = ( m11*m23*m30 - m13*m21*m30 + m13*m20*m31 - m10*m23*m31 - m11*m20*m33 + m10*m21*m33)/d;
+		m1[3] = ( m12*m21*m30 - m11*m22*m30 - m12*m20*m31 + m10*m22*m31 + m11*m20*m32 - m10*m21*m32)/d;
 		   
-		this.elements[4] = ( m03*m22*m31 - m02*m23*m31 - m03*m21*m32 + m01*m23*m32 + m02*m21*m33 - m01*m22*m33)/d;
-		this.elements[5] = ( m02*m23*m30 - m03*m22*m30 + m03*m20*m32 - m00*m23*m32 - m02*m20*m33 + m00*m22*m33)/d;
-		this.elements[6] = ( m03*m21*m30 - m01*m23*m30 - m03*m20*m31 + m00*m23*m31 + m01*m20*m33 - m00*m21*m33)/d;
-		this.elements[7] = ( m01*m22*m30 - m02*m21*m30 + m02*m20*m31 - m00*m22*m31 - m01*m20*m32 + m00*m21*m32)/d;
+		m1[4] = ( m03*m22*m31 - m02*m23*m31 - m03*m21*m32 + m01*m23*m32 + m02*m21*m33 - m01*m22*m33)/d;
+		m1[5] = ( m02*m23*m30 - m03*m22*m30 + m03*m20*m32 - m00*m23*m32 - m02*m20*m33 + m00*m22*m33)/d;
+		m1[6] = ( m03*m21*m30 - m01*m23*m30 - m03*m20*m31 + m00*m23*m31 + m01*m20*m33 - m00*m21*m33)/d;
+		m1[7] = ( m01*m22*m30 - m02*m21*m30 + m02*m20*m31 - m00*m22*m31 - m01*m20*m32 + m00*m21*m32)/d;
 		   
-		this.elements[8] = ( m02*m13*m31 - m03*m12*m31 + m03*m11*m32 - m01*m13*m32 - m02*m11*m33 + m01*m12*m33)/d;
-		this.elements[9] = ( m03*m12*m30 - m02*m13*m30 - m03*m10*m32 + m00*m13*m32 + m02*m10*m33 - m00*m12*m33)/d;
-		this.elements[10] = ( m01*m13*m30 - m03*m11*m30 + m03*m10*m31 - m00*m13*m31 - m01*m10*m33 + m00*m11*m33)/d;
-		this.elements[11] = ( m02*m11*m30 - m01*m12*m30 - m02*m10*m31 + m00*m12*m31 + m01*m10*m32 - m00*m11*m32)/d;
+		m1[8] = ( m02*m13*m31 - m03*m12*m31 + m03*m11*m32 - m01*m13*m32 - m02*m11*m33 + m01*m12*m33)/d;
+		m1[9] = ( m03*m12*m30 - m02*m13*m30 - m03*m10*m32 + m00*m13*m32 + m02*m10*m33 - m00*m12*m33)/d;
+		m1[10] = ( m01*m13*m30 - m03*m11*m30 + m03*m10*m31 - m00*m13*m31 - m01*m10*m33 + m00*m11*m33)/d;
+		m1[11] = ( m02*m11*m30 - m01*m12*m30 - m02*m10*m31 + m00*m12*m31 + m01*m10*m32 - m00*m11*m32)/d;
 			
-		this.elements[12] = ( m03*m12*m21 - m02*m13*m21 - m03*m11*m22 + m01*m13*m22 + m02*m11*m23 - m01*m12*m23)/d;
-		this.elements[13] = ( m02*m13*m20 - m03*m12*m20 + m03*m10*m22 - m00*m13*m22 - m02*m10*m23 + m00*m12*m23)/d;
-		this.elements[14] = ( m03*m11*m20 - m01*m13*m20 - m03*m10*m21 + m00*m13*m21 + m01*m10*m23 - m00*m11*m23)/d;
-		this.elements[15] = ( m01*m12*m20 - m02*m11*m20 + m02*m10*m21 - m00*m12*m21 - m01*m10*m22 + m00*m11*m22)/d;
+		m1[12] = ( m03*m12*m21 - m02*m13*m21 - m03*m11*m22 + m01*m13*m22 + m02*m11*m23 - m01*m12*m23)/d;
+		m1[13] = ( m02*m13*m20 - m03*m12*m20 + m03*m10*m22 - m00*m13*m22 - m02*m10*m23 + m00*m12*m23)/d;
+		m1[14] = ( m03*m11*m20 - m01*m13*m20 - m03*m10*m21 + m00*m13*m21 + m01*m10*m23 - m00*m11*m23)/d;
+		m1[15] = ( m01*m12*m20 - m02*m11*m20 + m02*m10*m21 - m00*m12*m21 - m01*m10*m22 + m00*m11*m22)/d;
 		
 		return this;
 	}
@@ -379,10 +434,26 @@
 	};
 	
 	matrix.prototype.rand = function(){
-		var i = 16;
-		while (i--){
-			this.elements[i] = Math.random()*1000;
-		}
+
+		var e = this.elements;
+
+		e[0] = Math.random()*1000;
+		e[1] = Math.random()*1000;
+		e[2] = Math.random()*1000;
+		e[3] = Math.random()*1000;
+		e[4] = Math.random()*1000;
+		e[5] = Math.random()*1000;
+		e[6] = Math.random()*1000;
+		e[7] = Math.random()*1000;
+		e[8] = Math.random()*1000;
+		e[9] = Math.random()*1000;
+		e[10] = Math.random()*1000;
+		e[11] = Math.random()*1000;
+		e[12] = Math.random()*1000;
+		e[13] = Math.random()*1000;
+		e[14] = Math.random()*1000;
+		e[15] = Math.random()*1000;
+		
 		return this;
 	};
 	
@@ -398,32 +469,25 @@
 	}
 	matrix.makeFrustum = function (left, right, bottom, top, znear, zfar){
 	
-		var X = 2*znear/(right-left),
-			Y = 2*znear/(top-bottom),
-			A = (right+left)/(right-left),
-			B = (top+bottom)/(top-bottom),
-			C = -(zfar+znear)/(zfar-znear),
-			D = -2*zfar*znear/(zfar-znear),
-			r = [];
+		var e = [];
+		e[0] = 2*znear/(right-left);
+		e[1] = 0;
+		e[2] = 0;
+		e[3] = 0;
+		e[4] = 0;
+		e[5] = 2*znear/(top-bottom);
+		e[6] = 0;
+		e[7] = 0;
+		e[8] = (right+left)/(right-left);
+		e[9] = (top+bottom)/(top-bottom);
+		e[10] = -(zfar+znear)/(zfar-znear);
+		e[11] = -1;
+		e[12] = 0;
+		e[13] = 0;
+		e[14] = -2*zfar*znear/(zfar-znear);
+		e[15] = 0;
 		
-		r[0] = 2*znear/(right-left);
-		r[1] = 0;
-		r[2] = 0;
-		r[3] = 0;
-		r[4] = 0;
-		r[5] = 2*znear/(top-bottom);
-		r[6] = 0;
-		r[7] = 0;
-		r[8] = (right+left)/(right-left);
-		r[9] = (top+bottom)/(top-bottom);
-		r[10] = -(zfar+znear)/(zfar-znear);
-		r[11] = -1;
-		r[12] = 0;
-		r[13] = 0;
-		r[14] = -2*zfar*znear/(zfar-znear);
-		r[15] = 0;
-		
-		return matrix.set(r);
+		return matrix.set(e);
 	}
 	
 	matrix.makePerspective = function (fovy, aspect, znear, zfar) {
@@ -438,32 +502,26 @@
 	
 	matrix.makeOrtho = function(left, right, bottom, top, znear, zfar) {
 
-		var tX = -(right+left)/(right-left),
-			tY = -(top+bottom)/(top-bottom),
-			tZ = -(zfar+znear)/(zfar-znear),
-			X = 2 / (right-left),
-			Y = 2 / (top-bottom),
-			Z = -2 / (zfar-znear),
-			r = [];
+		var e = [];
 
-		r[0] = 2 / (right-left);
-		r[1] = 0;
-		r[2] = 0;
-		r[3] = 0;
-		r[4] = 0;
-		r[5] = 2 / (top-bottom);
-		r[6] = 0;
-		r[7] = 0;
-		r[8] = 0;
-		r[9] = 0;
-		r[10] = -2 / (zfar-znear);
-		r[11] = 0;
-		r[12] = -(right+left)/(right-left);
-		r[13] = -(top+bottom)/(top-bottom);
-		r[14] = -(zfar+znear)/(zfar-znear);
-		r[15] = 0;
+		e[0] = 2 / (right-left);
+		e[1] = 0;
+		e[2] = 0;
+		e[3] = 0;
+		e[4] = 0;
+		e[5] = 2 / (top-bottom);
+		e[6] = 0;
+		e[7] = 0;
+		e[8] = 0;
+		e[9] = 0;
+		e[10] = -2 / (zfar-znear);
+		e[11] = 0;
+		e[12] = -(right+left)/(right-left);
+		e[13] = -(top+bottom)/(top-bottom);
+		e[14] = -(zfar+znear)/(zfar-znear);
+		e[15] = 0;
 
-		return matrix.set(r);
+		return matrix.set(e);
 	};
 	
 	matrix.makeRotate = function(angle, axis){
@@ -562,9 +620,9 @@
 		var a = this.elements,
 			b = vector.elements;
 			
-		this.elements[0] = a[0] + b[0];	
-		this.elements[1] = a[1] + b[1];	
-		this.elements[2] = a[2] + b[2];
+		a[0] = a[0] + b[0];	
+		a[1] = a[1] + b[1];	
+		a[2] = a[2] + b[2];
 		
 		return this;
 	}
@@ -573,9 +631,9 @@
 		var a = this.elements,
 			b = vector.elements;
 			
-		this.elements[0] = a[0] - b[0];	
-		this.elements[1] = a[1] - b[1];	
-		this.elements[2] = a[2] - b[2];
+		a[0] = a[0] - b[0];	
+		a[1] = a[1] - b[1];	
+		a[2] = a[2] - b[2];
 		
 		return this;
 	}
@@ -587,9 +645,9 @@
 			a0 = a[0],a1 = a[1],a2 = a[2],
 			b0 = b[0],b1 = b[1],b2 = b[2];
 		
-		this.elements[0] = a1*b2 - a2*b1;
-		this.elements[1] = a2*b0 - a0*b2;
-		this.elements[2] = a0*b1 - a1*b0;
+		a[0] = a1*b2 - a2*b1;
+		a[1] = a2*b0 - a0*b2;
+		a[2] = a0*b1 - a1*b0;
 		
 		return this;
 	}
@@ -613,9 +671,9 @@
 		var a = this.elements,
 			l = 1/Math.sqrt(a[0]*a[0] + a[1]*a[1] + a[2]*a[2]);
 			
-		this.elements[0] = a[0]*l;
-		this.elements[1] = a[1]*l;
-		this.elements[2] = a[2]*l;
+		a[0] = a[0]*l;
+		a[1] = a[1]*l;
+		a[2] = a[2]*l;
 		
 		return this;
 	}
