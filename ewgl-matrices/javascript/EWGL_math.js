@@ -468,60 +468,66 @@
 		return 	(new matrix(elements));
 	}
 	matrix.makeFrustum = function (left, right, bottom, top, znear, zfar){
-	
-		var e = [];
-		e[0] = 2*znear/(right-left);
-		e[1] = 0;
-		e[2] = 0;
-		e[3] = 0;
-		e[4] = 0;
-		e[5] = 2*znear/(top-bottom);
-		e[6] = 0;
-		e[7] = 0;
-		e[8] = (right+left)/(right-left);
-		e[9] = (top+bottom)/(top-bottom);
-		e[10] = -(zfar+znear)/(zfar-znear);
-		e[11] = -1;
-		e[12] = 0;
-		e[13] = 0;
-		e[14] = -2*zfar*znear/(zfar-znear);
-		e[15] = 0;
-		
-		return matrix.set(e);
+		return new matrix( 	2*znear/(right-left),
+							0,
+							0,
+							0,
+							0,
+							2*znear/(top-bottom),
+							0,
+							0,
+							(right+left)/(right-left),
+							(top+bottom)/(top-bottom),
+							-(zfar+znear)/(zfar-znear),
+							-1,
+							0,
+							0,
+							-2*zfar*znear/(zfar-znear),
+							0);
 	}
 	
 	matrix.makePerspective = function (fovy, aspect, znear, zfar) {
 	
-		var ymax = znear * Math.tan(fovy * Math.PI / 360.0),
-			ymin = -ymax,
-			xmin = ymin * aspect,
-			xmax = ymax * aspect;
+		var top = znear * Math.tan(fovy * Math.PI / 360.0),
+			bottom = -ymax,
+			left = ymin * aspect,
+			right = ymax * aspect;
 
-		return matrix.makeFrustum(xmin, xmax, ymin, ymax, znear, zfar);
+		return new matrix( 	2*znear/(right-left),
+							0,
+							0,
+							0,
+							0,
+							2*znear/(top-bottom),
+							0,
+							0,
+							(right+left)/(right-left),
+							(top+bottom)/(top-bottom),
+							-(zfar+znear)/(zfar-znear),
+							-1,
+							0,
+							0,
+							-2*zfar*znear/(zfar-znear),
+							0);
 	};
 	
 	matrix.makeOrtho = function(left, right, bottom, top, znear, zfar) {
-
-		var e = [];
-
-		e[0] = 2 / (right-left);
-		e[1] = 0;
-		e[2] = 0;
-		e[3] = 0;
-		e[4] = 0;
-		e[5] = 2 / (top-bottom);
-		e[6] = 0;
-		e[7] = 0;
-		e[8] = 0;
-		e[9] = 0;
-		e[10] = -2 / (zfar-znear);
-		e[11] = 0;
-		e[12] = -(right+left)/(right-left);
-		e[13] = -(top+bottom)/(top-bottom);
-		e[14] = -(zfar+znear)/(zfar-znear);
-		e[15] = 0;
-
-		return matrix.set(e);
+		return new matrix( 	2 / (right-left),
+							0,
+							0,
+							0,
+							0,
+							2 / (top-bottom),
+							0,
+							0,
+							0,
+							0,
+							-2 / (zfar-znear),
+							0,
+							-(right+left)/(right-left),
+							-(top+bottom)/(top-bottom),
+							-(zfar+znear)/(zfar-znear),
+							0);
 	};
 	
 	matrix.makeRotate = function(angle, axis){
@@ -529,75 +535,63 @@
 			x = normAxis[0], y = normAxis[1], z = normAxis[2],
 			c = Math.cos(angle),
 			c1 = 1-c,
-			s = Math.sin(angle),
-			r = [];
-		
-		r[0] = x*x*c1+c;
-		r[1] = y*x*c1+z*s;
-		r[2] = z*x*c1-y*s;
-		r[3] = 0;
-		r[4] = x*y*c1-z*s;
-		r[5] = y*y*c1+c;
-		r[6] = y*z*c1+x*s;
-		r[7] = 0;
-		r[8] = x*z*c1+y*s;
-		r[9] = y*z*c1-x*s;
-		r[10] = z*z*c1+c;
-		r[11] = 0;
-		r[12] = 0;
-		r[13] = 0;
-		r[14] = 0;
-		r[15] = 1;
-
-		return matrix.set(r);
+			s = Math.sin(angle);
+			return new matrix( 	x*x*c1+c,
+								y*x*c1+z*s,
+								z*x*c1-y*s,
+								0,
+								x*y*c1-z*s,
+								y*y*c1+c,
+								y*z*c1+x*s,
+								0,
+								x*z*c1+y*s,
+								y*z*c1-x*s,
+								z*z*c1+c,
+								0,
+								0,
+								0,
+								0,
+								1);
 	};
 	
 	matrix.makeScale = function(vector){
-		var scale = vector.elements ? vector.elements : vector,
-			r = [];
-			
-		r[0] = scale[0];
-		r[1] = 0;
-		r[2] = 0;
-		r[3] = 0;
-		r[4] = 0;
-		r[5] = scale[1];
-		r[6] = 0;
-		r[7] = 0;
-		r[8] = 0;
-		r[9] = 0;
-		r[10] = scale[2];
-		r[11] = 0;
-		r[12] = 0;
-		r[13] = 0;
-		r[14] = 0;
-		r[15] = 1;
-
-		return matrix.set(r);
+		var scale = vector.elements ? vector.elements : vector;
+		return new matrix(	scale[0],
+							0,
+							0,
+							0,
+							0,
+							scale[1],
+							0,
+							0,
+							0,
+							0,
+							scale[2],
+							0,
+							0,
+							0,
+							0,
+							1);
 	};
 	
 	matrix.makeTranslate = function(vector){
-		var translate = vector.elements ? vector.elements : vector,
-			r = [];
-			
-		r[0] = 1;
-		r[1] = 0;
-		r[2] = 0;
-		r[3] = 0;
-		r[4] = 0;
-		r[5] = 1;
-		r[6] = 0;
-		r[7] = 0;
-		r[8] = 0;
-		r[9] = 0;
-		r[10] = 1;
-		r[11] = 0;
-		r[12] = translate[0];
-		r[13] = translate[1];
-		r[14] = translate[2];
-		r[15] = 1;
-
-		return matrix.set(r);
+		var translate = vector.elements ? vector.elements : vector;
+		return new matrix(	1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							0,
+							0,
+							0,
+							1,
+							0,
+							translate[0],
+							translate[1],
+							translate[2],
+							1);
 	};
 	
 	
