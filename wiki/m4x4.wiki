@@ -12,6 +12,8 @@ elements  = A 16 wide WebGLFloatArray which hold your matrix like opengl
 
 ==Class methods==
 
+-----
+
 === I ===
 
 This returns a new identitymatrix.
@@ -19,6 +21,8 @@ This returns a new identitymatrix.
 {{{
 m4x4.I();
 }}}
+
+-----
 
 === set ===
 
@@ -34,6 +38,8 @@ m4x4.set(array1);
 }}}
 
 equivalent to m4x4.$
+
+-----
 
 === $ ===
 
@@ -58,6 +64,8 @@ This returns a new matrix for a projection frustum with the given parameters.
 m4x4.makeFrustrum(left, right, bottom, top, znear, zfar);
 }}}
 
+-----
+
 === makePerspective ===
 
 This returns a new matrix for a perspective projection with the given parameters.
@@ -65,6 +73,8 @@ This returns a new matrix for a perspective projection with the given parameters
 {{{
 m4x4.makePerspective(fovy, aspect, znear, zfar);
 }}}
+
+-----
 
 === makeOrtho ===
 
@@ -74,6 +84,8 @@ This returns a new matrix for an orthogonal frustum projection with the given pa
 m4x4.makeOrtho(left, right, bottom, top, znear, zfar)
 }}}
 
+-----
+
 === makeRotate ===
 
 This returns a new matrix for rotations.
@@ -81,5 +93,19 @@ This returns a new matrix for rotations.
 {{{
 m4x4.makeRotate(angle,vector);
 }}}
+
+-----
+
+=== makeScale ===
+
+This returns a new matrix for scaling purposes.
+
+{{{
+m4x4.makeScale(vector);
+}}}
+
+-----
+
+==Instance methods==
 
 TODO
