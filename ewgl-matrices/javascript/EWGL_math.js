@@ -342,29 +342,91 @@
 	};
 	
 	matrix.prototype.max = function(){
-		var i = 16,e = this.elements,m = 0;
-		while (i--){
-			if (Math.abs(e[i]) > Math.abs(m)) { m = e[i];}
-		}
-		return m;
+		var e = this.elements, m = e[0], j = e[1];
+                if (j > m) { m = j}
+                j = e[2];
+                if (j > m) { m = j}
+                j = e[3];
+                if (j > m) { m = j}
+                j = e[4];
+                if (j > m) { m = j}
+                j = e[5];
+                if (j > m) { m = j}
+                j = e[6];
+                if (j > m) { m = j}
+                j = e[7];
+                if (j > m) { m = j}
+                j = e[8];
+                if (j > m) { m = j}
+                j = e[9];
+                if (j > m) { m = j}
+                j = e[10];
+                if (j > m) { m = j}
+                j = e[12];
+                if (j > m) { m = j}
+                j = e[13];
+                if (j > m) { m = j}
+                j = e[14];
+                if (j > m) { m = j}
+                j = e[15];
+                if (j > m) { return j}
+                return m;
 	};
 	
 	matrix.prototype.min = function(){
-		var i = 16,e = this.elements,m = Infinity;
-		while (i--){
-			if (Math.abs(e[i]) < Math.abs(m)) { m = e[i];}
-		}
-		return m;
+
+		var e = this.elements, m = e[0], j = e[1];
+                if (j < m) { m = j}
+                j = e[2];
+                if (j < m) { m = j}
+                j = e[3];
+                if (j < m) { m = j}
+                j = e[4];
+                if (j < m) { m = j}
+                j = e[5];
+                if (j < m) { m = j}
+                j = e[6];
+                if (j < m) { m = j}
+                j = e[7];
+                if (j < m) { m = j}
+                j = e[8];
+                if (j < m) { m = j}
+                j = e[9];
+                if (j > m) { m = j}
+                j = e[10];
+                if (j < m) { m = j}
+                j = e[12];
+                if (j < m) { m = j}
+                j = e[13];
+                if (j < m) { m = j}
+                j = e[14];
+                if (j < m) { m = j}
+                j = e[15];
+                if (j < m) { return j}
+                return m;
 	};
 	
 	matrix.prototype.indexOf = function(value){
-		var i = 16,j;
-		while (i--){
-			j = 15 - i;
-			if (this.elements[j] == value) { return {'i': parseInt(j/4)+1, 'j': j%4+1};}
-		}
+		e = this.elements;
+
+		if (e[0] == value) { return  new WebGLIntArray([0, 0])}
+		if (e[1] == value) { return  new WebGLIntArray([0, 1])}
+		if (e[2] == value) { return  new WebGLIntArray([0, 2])}
+		if (e[3] == value) { return  new WebGLIntArray([0, 3])}
+		if (e[4] == value) { return  new WebGLIntArray([1, 0])}
+		if (e[5] == value) { return  new WebGLIntArray([1, 1])}
+		if (e[6] == value) { return  new WebGLIntArray([1, 2])}
+		if (e[7] == value) { return  new WebGLIntArray([1, 3])}
+		if (e[8] == value) { return  new WebGLIntArray([2, 0])}
+		if (e[9] == value) { return  new WebGLIntArray([2, 1])}
+		if (e[10] == value) { return new WebGLIntArray([2, 2])}
+		if (e[11] == value) { return new WebGLIntArray([2, 3])}
+		if (e[12] == value) { return new WebGLIntArray([3, 0])}
+		if (e[13] == value) { return new WebGLIntArray([3, 1])}
+		if (e[14] == value) { return new WebGLIntArray([3, 2])}
+		if (e[15] == value) { return new WebGLIntArray([3, 3])}
 		return null;
-	};
+       };
 	
 	matrix.prototype.diagonal = function(){
 		var els = this.elements;
@@ -594,9 +656,6 @@
 							1);
 	};
 	
-	
-	window.m4x4 = matrix;
-	
 	var vector = function(){
 		this.elements = new WebGLFloatArray(arguments[0] || [0,0,0]);
 		return this;
@@ -678,4 +737,5 @@
 	}
 	
 	window.v3 = vector;
+	window.m4x4 = matrix;
 })();
