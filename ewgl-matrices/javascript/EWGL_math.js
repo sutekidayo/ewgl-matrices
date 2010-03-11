@@ -3,8 +3,7 @@
 	var identitymatrix =  [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1];
 
 	var matrix = function(els){
-		els = els || identitymatrix
-		this.elements = new WebGLFloatArray(els);
+		this.elements = new WebGLFloatArray( els || identitymatrix);
 		return this;
 	};
 	
