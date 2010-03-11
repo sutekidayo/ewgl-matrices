@@ -551,9 +551,9 @@
 	matrix.makePerspective = function (fovy, aspect, znear, zfar) {
 	
 		var top = znear * Math.tan(fovy * Math.PI / 360.0),
-			bottom = -ymax,
-			left = ymin * aspect,
-			right = ymax * aspect;
+			bottom = -top,
+			left = top * aspect,
+			right = bottom * aspect;
 
 		return new matrix( 	2*znear/(right-left),
 							0,
