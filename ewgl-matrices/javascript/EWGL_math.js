@@ -531,7 +531,7 @@
 		return 	(new matrix(elements));
 	}
 	matrix.makeFrustum = function (left, right, bottom, top, znear, zfar){
-		return new matrix( 	2*znear/(right-left),
+		return new matrix([ 2*znear/(right-left),
 							0,
 							0,
 							0,
@@ -546,7 +546,7 @@
 							0,
 							0,
 							-2*zfar*znear/(zfar-znear),
-							0);
+							0]);
 	}
 	
 	matrix.makePerspective = function (fovy, aspect, znear, zfar) {
@@ -556,7 +556,7 @@
 			left = top * aspect,
 			right = bottom * aspect;
 
-		return new matrix( 	2*znear/(right-left),
+		return new matrix([ 2*znear/(right-left),
 							0,
 							0,
 							0,
@@ -571,11 +571,11 @@
 							0,
 							0,
 							-2*zfar*znear/(zfar-znear),
-							0);
+							0]);
 	};
 	
 	matrix.makeOrtho = function(left, right, bottom, top, znear, zfar) {
-		return new matrix( 	2 / (right-left),
+		return new matrix([ 2 / (right-left),
 							0,
 							0,
 							0,
@@ -590,7 +590,7 @@
 							-(right+left)/(right-left),
 							-(top+bottom)/(top-bottom),
 							-(zfar+znear)/(zfar-znear),
-							0);
+							0]);
 	};
 	
 	matrix.makeRotate = function(angle, axis){
@@ -599,7 +599,7 @@
 			c = Math.cos(angle),
 			c1 = 1-c,
 			s = Math.sin(angle);
-			return new matrix( 	x*x*c1+c,
+			return new matrix([ x*x*c1+c,
 								y*x*c1+z*s,
 								z*x*c1-y*s,
 								0,
@@ -614,12 +614,12 @@
 								0,
 								0,
 								0,
-								1);
+								1]);
 	};
 	
 	matrix.makeScale = function(vector){
 		var scale = vector.elements ? vector.elements : vector;
-		return new matrix(	scale[0],
+		return new matrix([	scale[0],
 							0,
 							0,
 							0,
@@ -634,12 +634,12 @@
 							0,
 							0,
 							0,
-							1);
+							1]);
 	};
 	
 	matrix.makeTranslate = function(vector){
 		var translate = vector.elements ? vector.elements : vector;
-		return new matrix(	1,
+		return new matrix(	[1,
 							0,
 							0,
 							0,
@@ -654,7 +654,7 @@
 							translate[0],
 							translate[1],
 							translate[2],
-							1);
+							1]);
 	};
 	
 	var vector = function(){
