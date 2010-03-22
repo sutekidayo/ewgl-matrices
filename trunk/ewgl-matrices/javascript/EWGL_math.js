@@ -4,6 +4,7 @@
 
 	var matrix = function(els){
 		this.elements = new WebGLFloatArray( els || identitymatrix);
+		this.matrixstack = [];
 		return this;
 	};
 	
@@ -552,8 +553,8 @@
 	
 		var top = znear * Math.tan(fovy * Math.PI / 360.0),
 			bottom = -top,
-			left = top * aspect,
-			right = bottom * aspect;
+			left = bottom * aspect,
+			right = top * aspect;
 
 		return new matrix([ 2*znear/(right-left),
 							0,
