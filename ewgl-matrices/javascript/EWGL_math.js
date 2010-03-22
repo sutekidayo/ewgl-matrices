@@ -4,7 +4,7 @@
 
 	var matrix = function(els){
 		this.elements = new WebGLFloatArray( els || identitymatrix);
-		this.matrixstack = [];
+		//this.matrixstack = [];
 		return this;
 	};
 	
