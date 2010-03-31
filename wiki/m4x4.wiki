@@ -2,7 +2,7 @@
 
 = Class m4x4 =
 
-*Class methods* : I ,set, $, makeFrustum, makePerspective, makeOrtho, makeRotate, makeScale
+*Class methods* : [m4x4#Class_m4x4 I] ,set, $, makeFrustum, makePerspective, makeOrtho, makeRotate, makeScale
 
 *Instance methods* : identity, I, e, row, col, dimensions, rows, cols, eql, setElements, dup, map, add, substract, x, multiply, translate, rotate, scale, transpose, max, min, indexOf, diagonal, det, determinant, isSingular, tr, trace, inverse, view, rand
 
