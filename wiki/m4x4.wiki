@@ -7,7 +7,7 @@
 *Instance methods* : identity, I, e, row, col, dimensions, rows, cols, eql, setElements, dup, map, add, substract, x, multiply, translate, rotate, scale, transpose, max, min, indexOf, diagonal, det, determinant, isSingular, tr, trace, inverse, view, rand
 
 *Instance variables* : 
-elements  = A 16 wide WebGLFloatArray which hold your matrix like opengl 
+elements  = A 16 wide WebGLFloatArray which hold your matrix like opengl does
 
 
 ==Class methods==
@@ -107,5 +107,18 @@ m4x4.makeScale(vector);
 -----
 
 ==Instance methods==
+
+All instance methods change the original matrix and return that matrix . The only exception is dup who duplicates the original matrix and returns the duplicated matrix. 
+
+=== I ===
+
+This sets the original matrix as a identitymatrix and returns that matrix.
+
+{{{
+var m1 = m4x4.set(1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4);
+m1.I();
+}}}
+
+-----
 
 TODO
