@@ -1,0 +1,1 @@
+sylvester is slow, so we need something better. That is why I generated ewgl matrices.
